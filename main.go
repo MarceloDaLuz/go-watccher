@@ -2,11 +2,14 @@ package main
 
 import (
 	"fmt"
+	"net/http"
 	"os"
 )
 
 func main() {
-	comandos()
+	for {
+		comandos()
+	}
 }
 
 func comandos() {
@@ -22,6 +25,7 @@ func comandos() {
 	switch comando {
 	case 1:
 		fmt.Println("Iniciando monitoramentos")
+		monitorando()
 	case 2:
 		fmt.Println("Exibindo logs...")
 	case 0:
@@ -30,6 +34,16 @@ func comandos() {
 	default:
 		fmt.Println("Comando não encontrado")
 	}
+}
+
+func monitorando() {
+	res, _ := http.Get("https://www.alura.com.br/")
+	if res.StatusCode == 200 {
+		fmt.Println("Alura está online!")
+	} else {
+		fmt.Println("Alura está offline!")
+	}
+
 }
 
 func saindoComSeguranca() {
